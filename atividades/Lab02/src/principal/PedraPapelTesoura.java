@@ -1,6 +1,5 @@
 package principal;
 
-import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -51,12 +50,10 @@ public class PedraPapelTesoura {
 		int opcao = -1;
 		do {
 			System.out.print("Deseja jogar contra: (1) Player - (2) Computador ? ");
-			try{
+			if(sc.hasNextInt()) {
 				opcao = sc.nextInt();
-			}catch(InputMismatchException e) {
-				sc.nextLine();
-				//Não trata nada, apenas repetirá a mensagem solicitando um valor
 			}
+			sc.nextLine();
 		}while(opcao < 1 || opcao > 2);
 		return opcao == 1 ? "JOGADOR 2" : "COMPUTADOR";
 	}	
@@ -65,12 +62,10 @@ public class PedraPapelTesoura {
 		int escolha = -1;
 		do {
 			System.out.print("\n(1) Pedra - (2) Papel - (3) Tesoura? ");
-			try {
+			if(sc.hasNextInt()) {
 				escolha = sc.nextInt();
-			}catch(InputMismatchException e) {
-				sc.nextLine();
-				//Não trata nada, apenas repetirá a mensagem solicitando um valor
 			}
+			sc.nextLine();
 		}while(escolha < 1 || escolha > COMBINACOES);
 		return escolha;
 	}
