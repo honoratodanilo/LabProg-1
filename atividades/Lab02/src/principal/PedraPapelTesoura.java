@@ -4,9 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 /*
- * Aluno 01: Ivanildo Simplício da Silva Filho
- * Aluno 02: Fernanda Eduarda de Medeiros Silva
- * Aluno 03: Wesley Porto Santos
+ * Aluno: Ivanildo Simplício da Silva Filho
  */
 
 public class PedraPapelTesoura {
