@@ -1,7 +1,7 @@
 package principal;
 
 /*
- * Aluno: Ivanildo Simplício da Silva Filho
+ * Aluno 01: Ivanildo Simplício da Silva Filho
  */
 
 import java.util.Scanner;
