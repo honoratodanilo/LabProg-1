@@ -25,7 +25,7 @@ public class JogoDaVelhaModularizado {
 		do {
 			jogada = 0;
 			limpaTabuleiro();
-			while(jogada<=1){
+			while(jogada<=9){
 				
 				mostraTabuleiro();
 				jogada();
