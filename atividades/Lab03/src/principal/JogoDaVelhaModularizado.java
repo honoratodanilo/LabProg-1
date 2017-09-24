@@ -1,7 +1,7 @@
 package principal;
 
 /*
- * Aluno 01: Ivanildo Simplício da Silva Filho
+ * Aluno 01: Ivanildo SimplÃ­cio da Silva Filho
  */
 
 import java.util.Scanner;
@@ -13,7 +13,7 @@ public class JogoDaVelhaModularizado {
 	final String SAIR = "-1";
 	final char O = 'O';
 	final char X = 'X';
-    int linha, coluna, jogada;
+    	int linha, coluna, jogada;
     
 	public static void main(String args[]){
 		JogoDaVelhaModularizado jogo = new JogoDaVelhaModularizado();
@@ -80,23 +80,23 @@ public class JogoDaVelhaModularizado {
 	
 	public boolean testaVitoria(char c) {
 		return  (tabuleiro[0][0]==c && tabuleiro[0][1]==c && tabuleiro[0][2]==c)||
-				(tabuleiro[1][0]==c && tabuleiro[1][1]==c && tabuleiro[1][2]==c)||
-				(tabuleiro[2][0]==c && tabuleiro[2][1]==c && tabuleiro[2][2]==c)||
-				(tabuleiro[0][0]==c && tabuleiro[1][0]==c && tabuleiro[2][0]==c)||
-				(tabuleiro[0][1]==c && tabuleiro[1][1]==c && tabuleiro[2][1]==c)||
-				(tabuleiro[0][2]==c && tabuleiro[1][2]==c && tabuleiro[2][2]==c)||
-				(tabuleiro[0][0]==c && tabuleiro[1][1]==c && tabuleiro[2][2]==c)||
-				(tabuleiro[0][2]==c && tabuleiro[1][1]==c && tabuleiro[2][0]==c);
+			(tabuleiro[1][0]==c && tabuleiro[1][1]==c && tabuleiro[1][2]==c)||
+			(tabuleiro[2][0]==c && tabuleiro[2][1]==c && tabuleiro[2][2]==c)||
+			(tabuleiro[0][0]==c && tabuleiro[1][0]==c && tabuleiro[2][0]==c)||
+			(tabuleiro[0][1]==c && tabuleiro[1][1]==c && tabuleiro[2][1]==c)||
+			(tabuleiro[0][2]==c && tabuleiro[1][2]==c && tabuleiro[2][2]==c)||
+			(tabuleiro[0][0]==c && tabuleiro[1][1]==c && tabuleiro[2][2]==c)||
+			(tabuleiro[0][2]==c && tabuleiro[1][1]==c && tabuleiro[2][0]==c);
 	}
 	
 	public void mostraTabuleiro() {
 		imprimeMensagem("    JOGO DA VELHA");
 		for(int i = 0; i < 3; i++){
-        	System.out.printf("     %c | %c | %c ", tabuleiro[i][0], tabuleiro[i][1], tabuleiro[i][2]);
-            if(i < 3-1){
-            	System.out.print("\n    -----------\n");
-            }
-        }
+        		System.out.printf("     %c | %c | %c ", tabuleiro[i][0], tabuleiro[i][1], tabuleiro[i][2]);
+           		if(i < 3-1){
+            			System.out.print("\n    -----------\n");
+            		}
+       		}
 	}
 	
 	public void mostraResultado(String mensagem) {
@@ -112,7 +112,7 @@ public class JogoDaVelhaModularizado {
 	
 	public void limpaTabuleiro() {
 		for(int i = 0; i < 3; i++)
-	        for(int j = 0; j < 3; j++)
-	            tabuleiro[i][j] = ' ';
+	        	for(int j = 0; j < 3; j++)
+	           		tabuleiro[i][j] = ' ';
 	}
 }
