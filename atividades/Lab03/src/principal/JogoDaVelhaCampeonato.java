@@ -3,9 +3,9 @@ package principal;
 import java.util.Arrays;
 
 /*
- * Aluno 01: Ivanildo Simplício da Silva Filho
- * 
- * 
+ * Aluno 01: Ivanildo SimplÃ­cio da Silva Filho
+ * Aluno 02: Fernanda Eduarda de Medeiros Silva
+ * Aluno 03: Wesley Porto Santos
  */
 
 import java.util.Scanner;
@@ -29,7 +29,7 @@ public class JogoDaVelhaCampeonato {
 	}
 
 	public void inscreveJogadores() {
-		System.out.print("Inscrição dos jogadores\npara o campeonato");
+		System.out.print("InscriÃ§Ã£o dos jogadores\npara o campeonato");
 		imprimeLinha();
 		for(int i = 0; i < NUMERO_DE_JOGADORES; i++) {
 			System.out.printf("Player %d: ", i+1);
@@ -201,7 +201,7 @@ public class JogoDaVelhaCampeonato {
 		System.out.println("2 - Novo duelo");
 		System.out.println("0 - Sair");
 		do {
-			System.out.print("Opção: ");
+			System.out.print("OpÃ§Ã£o: ");
 			if(sc.hasNextInt()) {
 				opcao = sc.nextInt();
 			}
