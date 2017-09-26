@@ -3,7 +3,7 @@ package principal;
 import java.util.Arrays;
 
 /*
- * Aluno 01: <Ivanildo Simplício da Silva Filho>
+ * Aluno 01: Ivanildo Simplício da Silva Filho
  * 
  * 
  */
@@ -25,12 +25,12 @@ public class JogoDaVelhaCampeonato {
 	public static void main(String args[]){
 		JogoDaVelhaCampeonato jogo = new JogoDaVelhaCampeonato();
 		jogo.inscreveJogadores();
-		jogo.play();
+		while(jogo.play());
 	}
 
-	//verificar
 	public void inscreveJogadores() {
-		System.out.println("Inscrição dos jogadores");
+		System.out.print("Inscrição dos jogadores\npara o campeonato");
+		imprimeLinha();
 		for(int i = 0; i < NUMERO_DE_JOGADORES; i++) {
 			System.out.printf("Player %d: ", i+1);
 			if(sc.hasNextLine()) {
@@ -39,26 +39,27 @@ public class JogoDaVelhaCampeonato {
 		}
 	}
 	
-	//verificar
 	public void selecionaDuelo() {
+		player1 = player2 = -1;
 		imprimeMensagem("Jogadores inscritos\n"+Arrays.toString(jogadoresNomes)+"\n\nSelecione os jogadores\npara o duelo [1,2,3,4]");
 		do {
 			System.out.print("Player 1: ");
 			if(sc.hasNextInt())
-				player1 = sc.nextInt();
+				player1 = sc.nextInt()-1;
 			sc.nextLine();
-		}while(player1 < 1 || player1 > NUMERO_DE_JOGADORES);
+			
+		}while(player1 < 0 || player1 > NUMERO_DE_JOGADORES-1);
 		
 		do {
 			System.out.print("Player 2: ");
 			if(sc.hasNextInt())
-				player2 = 1 - sc.nextInt();
+				player2 = sc.nextInt()-1;
 			sc.nextLine();
-		}while(player2 < 1 || player2 > NUMERO_DE_JOGADORES || player2 == player1);
+		}while(player2 < 0 || player2 > NUMERO_DE_JOGADORES-1 || player2 == player1);
 		
 	}
 	
-	public void play() {
+	public boolean play() {
 		int opcao = -1;
 		selecionaDuelo();
 		do {
@@ -82,26 +83,14 @@ public class JogoDaVelhaCampeonato {
 					break;
 				}
 			}
-			
-			//modularizar
-			System.out.println("1 - Repetir duelo");
-			System.out.println("2 - Novo duelo");
-			System.out.println("0 - Sair");
-			do {
-				System.out.print("Opção: ");
-				if(sc.hasNextInt()) {
-					opcao = sc.nextInt();
-				}
-				sc.nextLine();
-			}while(opcao < 0 || opcao > 2);
-			
+			opcao = menu();
 			if(opcao == 2)
-				play();
+				return true;
+			
 		}while(opcao != SAIR);
-		
-		//implementar ranking
-		imprimeMensagem("Ranking dos jogadores\n"+Arrays.toString(jogadoresNomes)+"\n"+Arrays.toString(jogadoresVitorias));
+		exibeRanking();
 		sc.close();
+		return false;
 	}
 
 	public void jogada() {
@@ -171,10 +160,54 @@ public class JogoDaVelhaCampeonato {
 				tabuleiro[i][j] = ' ';
 	}
 	
-	private void imprimeLinha() {
+	public void imprimeLinha() {
 		System.out.println();
-		for(int i = 0; i < 21; i++)
+		for(int i = 0; i < 25; i++)
 			System.out.print("-");
 		System.out.println();
 	}
+	
+	public void exibeRanking() {
+		ordenaRanking();
+		imprimeMensagem("Ranking geral");
+		System.out.printf("VENCEU   JOGADOR\n");
+		for(int i = 0; i < NUMERO_DE_JOGADORES; i++) {
+			System.out.printf("%4d     %s\n", jogadoresVitorias[i], jogadoresNomes[i]);
+		}
+	}
+	
+	public void ordenaRanking() {
+		for(int i = 0; i < NUMERO_DE_JOGADORES; i++) {
+			int maior = i;
+			for(int j = i+1; j < NUMERO_DE_JOGADORES; j++) {
+				if(jogadoresVitorias[maior] < jogadoresVitorias[j]) {
+					maior = j;
+				}
+			}
+			if(maior != i) {
+				int aux = jogadoresVitorias[maior];
+				jogadoresVitorias[maior] = jogadoresVitorias[i];
+				jogadoresVitorias[i] = aux;
+				String sAux = jogadoresNomes[maior];
+				jogadoresNomes[maior] = jogadoresNomes[i];
+				jogadoresNomes[i] = sAux;
+			}
+		}
+	}
+	
+	public int menu() {
+		int opcao = -1;
+		System.out.println("1 - Repetir duelo");
+		System.out.println("2 - Novo duelo");
+		System.out.println("0 - Sair");
+		do {
+			System.out.print("Opção: ");
+			if(sc.hasNextInt()) {
+				opcao = sc.nextInt();
+			}
+			sc.nextLine();
+		}while(opcao < 0 || opcao > 2);
+		return opcao;
+	}
+	
 }
