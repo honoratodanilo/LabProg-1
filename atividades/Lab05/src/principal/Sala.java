@@ -9,6 +9,7 @@ package principal;
 /**
  * Classe Sala que contém todos métodos que caracterizam uma sala real.
  * @author ivansimplicio
+ * @version 1.0 - Last Modified: 26/10/2017 10:49
  */
 public class Sala {
 	
