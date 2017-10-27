@@ -2,14 +2,17 @@ package principal;
 
 /*
  * Aluno 01: Ivanildo Simplício da Silva Filho
- * Aluno 02:
- * Aluno 03:
+ * Aluno 02: Carlos Vinicius Nascimento Lira
+ * Aluno 03: Wesley Porto Santos
  */
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Classe de testes da classe Sala.
+ */
 public class TestaSala {
 	private Sala sala;
 	private final int NUM_LINHAS = 10;
@@ -107,7 +110,7 @@ public class TestaSala {
 	}
 	
 	@Test
-	public void testaIsVazia(){
+	public void testaIsVazia() throws Exception{
 		Assert.assertTrue(sala.isVazia());
 		Assert.assertTrue(sala.inserirObstaculo(0, 0));
 		Assert.assertFalse(sala.isVazia());
@@ -138,10 +141,33 @@ public class TestaSala {
 		Assert.assertTrue(sala.inserirObstaculo(9, 9));
 		Assert.assertFalse(sala.isPosicaoLivre(9, 9));
 
-		Assert.assertFalse(sala.inserirObstaculo(10, 10));
-		Assert.assertFalse(sala.inserirObstaculo(-1, -1));
-		Assert.assertFalse(sala.inserirObstaculo(-1, 0));
-		Assert.assertFalse(sala.inserirObstaculo(0, -1));
+		Assert.assertFalse(sala.inserirObstaculo(0, 0));
+		Assert.assertFalse(sala.inserirObstaculo(9, 9));
+		
+		try {
+			sala.inserirObstaculo(10, 10);
+			Assert.fail("Esperava-se uma exceção de posição inexistente.");
+		}catch(Exception e) {
+			Assert.assertEquals("Mensagem errada.", "Posicao inexistente.", e.getMessage());
+		}
+		try {
+			sala.inserirObstaculo(-1, -1);
+			Assert.fail("Esperava-se uma exceção de posição inexistente.");
+		}catch(Exception e) {
+			Assert.assertEquals("Mensagem errada.", "Posicao inexistente.", e.getMessage());
+		}
+		try {
+			sala.inserirObstaculo(-1, 0);
+			Assert.fail("Esperava-se uma exceção de posição inexistente.");
+		}catch(Exception e) {
+			Assert.assertEquals("Mensagem errada.", "Posicao inexistente.", e.getMessage());
+		}
+		try {
+			sala.inserirObstaculo(0, -1);
+			Assert.fail("Esperava-se uma exceção de posição inexistente.");
+		}catch(Exception e) {
+			Assert.assertEquals("Mensagem errada.", "Posicao inexistente.", e.getMessage());
+		}
 	}
 
 	@Test
@@ -193,8 +219,9 @@ public class TestaSala {
 	}
 	
 	@Test
-	public void testaEquals() {
+	public void testaEquals() throws Exception {
 		Sala outraSala = null;
+		Assert.assertFalse(sala.equals(outraSala));
 		try {
 			outraSala = new Sala(NUM_LINHAS, NUM_COLUNAS);
 		} catch (Exception e) {

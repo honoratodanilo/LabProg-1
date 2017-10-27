@@ -2,14 +2,13 @@ package principal;
 
 /*
  * Aluno 01: Ivanildo Simplício da Silva Filho
- * Aluno 02:
- * Aluno 03:
+ * Aluno 02: Carlos Vinicius Nascimento Lira
+ * Aluno 03: Wesley Porto Santos
  */
 
 /**
  * Classe Sala que contém todos métodos que caracterizam uma sala real.
- * @author ivansimplicio
- * @version 1.0 - Last Modified: 26/10/2017 10:49
+ * @version 1.0 - Last Modified: 27/10/2017 11:22
  */
 public class Sala {
 	
@@ -80,15 +79,12 @@ public class Sala {
 	 * @return true caso o obstáculo tiver sido fixado na sala, e false caso não tenha sido fixado.
 	 * @throws Exception 
 	 */
-	public boolean inserirObstaculo(int linha, int coluna){
-		try {
-			if(isPosicaoLivre(linha, coluna)) {
-				sala[linha][coluna] = Sala.OCUPADO;
-				return true;
-			}	
-		}catch(Exception e) {
-			
-		}
+	public boolean inserirObstaculo(int linha, int coluna) throws Exception{
+		if(isPosicaoLivre(linha, coluna)) {
+			sala[linha][coluna] = Sala.OCUPADO;
+			return true;
+		}	
+
 		return false;
 	}
 
@@ -133,6 +129,9 @@ public class Sala {
 		return false;
 	}
 	
+	/**
+	 * Compara se duas salas são iguais, levando em conta suas dimensões e suas ocupações em cada posição.
+	 */
 	@Override
 	public boolean equals(Object outraSala) {
 		if(!(outraSala == null)) {
