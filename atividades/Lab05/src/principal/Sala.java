@@ -83,8 +83,7 @@ public class Sala {
 		if(isPosicaoLivre(linha, coluna)) {
 			sala[linha][coluna] = Sala.OCUPADO;
 			return true;
-		}	
-
+		}
 		return false;
 	}
 

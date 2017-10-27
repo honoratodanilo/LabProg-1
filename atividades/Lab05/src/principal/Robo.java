@@ -98,20 +98,45 @@ public class Robo {
 	}	
 
 	/**
+	 * Atualiza a posição do Robo na sala.
+	 * @param linhaAtual A linha em que o robo será posicionado.
+	 * @param colunaAtual A coluna em que o robo será posicionado.
+	 * @param status O novo status da posição.
+	 */
+	private void atualizaPosicao(int linhaAtual, int colunaAtual, int status) {
+		sala.setPosicao(linhaAtual, colunaAtual, status);
+		nPassos++;
+		energia--;
+	}
+	
+	/**
+	 * Movimenta o robô para nova posição caso seja possível.
+	 * @param linha A linha em que o robo será posicionado.
+	 * @param coluna A coluna em que o robo será posicionado.
+	 * @return true caso seja possível movimentar o robo para a nova posição, false se não for possível.
+	 */
+	private boolean movimentarRobo(int linha, int coluna) {
+		try {
+			if(sala.isPosicaoLivre(linha, coluna)) {
+				sala.setPosicao(linhaAtual, colunaAtual, Sala.LIVRE);
+				return true;
+			}	
+		}catch(Exception e) {
+			throw new RuntimeException(e);
+		}
+		return false;
+	}
+	
+	/**
 	 * Movimenta o robô para trás caso não esteja na margem e não tenha obstáculo.
 	 * @return true caso tenha sido movido, false caso não tenha sido possível mover.
 	 */
 	public boolean praTras() {
 		if(energiaAtual() > 0 && linhaAtual > 0) {
-			try {
-				if(sala.isPosicaoLivre(linhaAtual-1, colunaAtual)) {
-					sala.setPosicao(linhaAtual, colunaAtual, Sala.LIVRE);
-					sala.setPosicao(--linhaAtual, colunaAtual, Sala.OCUPADO);
-					nPassos++;
-					energia--;
-					return true;
-				}	
-			}catch(Exception e) {}
+			if(movimentarRobo(linhaAtual-1, colunaAtual)) {
+				atualizaPosicao(--linhaAtual, colunaAtual, Sala.OCUPADO);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -122,15 +147,10 @@ public class Robo {
 	 */
 	public boolean praFrente() {
 		if(energiaAtual() > 0 && linhaAtual < this.sala.getNumPosicoesVerticais()-1) {
-			try {
-				if(sala.isPosicaoLivre(linhaAtual+1, colunaAtual)) {
-					sala.setPosicao(linhaAtual, colunaAtual, Sala.LIVRE);
-					sala.setPosicao(++linhaAtual, colunaAtual, Sala.OCUPADO);
-					nPassos++;
-					energia--;
-					return true;
-				}	
-			}catch(Exception e) {}
+			if(movimentarRobo(linhaAtual+1, colunaAtual)) {
+				atualizaPosicao(++linhaAtual, colunaAtual, Sala.OCUPADO);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -141,15 +161,10 @@ public class Robo {
 	 */
 	public boolean esquerda() {
 		if(energiaAtual() > 0 && colunaAtual > 0) {
-			try {
-				if(sala.isPosicaoLivre(linhaAtual, colunaAtual-1)) {
-					sala.setPosicao(linhaAtual, colunaAtual, Sala.LIVRE);
-					sala.setPosicao(linhaAtual, --colunaAtual, Sala.OCUPADO);
-					nPassos++;
-					energia--;
-					return true;
-				}	
-			}catch(Exception e) {}
+			if(movimentarRobo(linhaAtual, colunaAtual-1)) {
+				atualizaPosicao(linhaAtual, --colunaAtual, Sala.OCUPADO);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -160,15 +175,10 @@ public class Robo {
 	 */
 	public boolean direita() {
 		if(energiaAtual() > 0 && colunaAtual < this.sala.getNumPosicoesHorizontais()-1) {
-			try {
-				if(sala.isPosicaoLivre(linhaAtual, colunaAtual+1)) {
-					sala.setPosicao(linhaAtual, colunaAtual, Sala.LIVRE);
-					sala.setPosicao(linhaAtual, ++colunaAtual, Sala.OCUPADO);
-					nPassos++;
-					energia--;
-					return true;
-				}	
-			}catch(Exception e) {}
+			if(movimentarRobo(linhaAtual, colunaAtual+1)) {
+				atualizaPosicao(linhaAtual, ++colunaAtual, Sala.OCUPADO);
+				return true;
+			}
 		}
 		return false;
 	}
