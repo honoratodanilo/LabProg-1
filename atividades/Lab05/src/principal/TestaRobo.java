@@ -42,6 +42,21 @@ public class TestaRobo{
 	@Test
 	public void testaCriacaoRobo() {
 		try {
+			Assert.assertTrue(robo.isPosicaoAtual(0, 0));
+			Assert.assertFalse(sala.isPosicaoLivre(0, 0));
+		}catch(Exception e) {
+			Assert.fail("Não deve cair aqui.");
+		}
+		try {
+			sala = criaSala();
+			sala.inserirObstaculo(0, 0);
+			robo = new Robo(sala, ENERGIA_PADRAO);
+		}catch(Exception e) {
+			Assert.fail("Não deve entrar aqui.");
+		}
+		Assert.assertTrue(robo.isPosicaoAtual(0, 1));
+
+		try {
 			new Robo(criaSala(), ENERGIA_PADRAO);
 		}catch(Exception e) {
 			Assert.fail("Não deve entrar aqui!");
@@ -72,7 +87,7 @@ public class TestaRobo{
 			Assert.fail("Esperado uma exceção pois a sala passada está cheia.");
 		}catch(Exception e) {
 			Assert.assertEquals("Mensagem errada", "A sala passada está cheia, não é possível posicionar o robo nesta sala.", e.getMessage());
-		}
+		}	
 	}
 	
 	@Test
@@ -93,7 +108,7 @@ public class TestaRobo{
 		Assert.assertTrue(robo.isPosicaoAtual(0,0));
 		
 		try {
-			sala = new Sala(LINHA, COLUNA);
+			sala = criaSala();
 			sala.inserirObstaculo(0, 0);
 			robo = new Robo(sala, ENERGIA_PADRAO);
 		}catch(Exception e) {
@@ -202,7 +217,7 @@ public class TestaRobo{
 		Assert.assertFalse(robo.equals(robo2));
 		
 		try{
-			sala2 = new Sala(LINHA, COLUNA);
+			sala2 = criaSala();
 			robo2 = new Robo(sala2, ENERGIA_PADRAO);
 		}catch(Exception e){
 			e.printStackTrace();
