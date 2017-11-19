@@ -10,6 +10,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Classe de Testes do objeto CD.
+ */
 public class TDD_CD {
 
 	CD cd = null;
