@@ -1,13 +1,13 @@
 package principal;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /*
  * Aluno 01: <Ivanildo Simplício da Silva Filho>
  * Aluno 02: <Fernanda Eduarda de Medeiros Silva>
  * Aluno 03: <Evelin Florenço da Silva>
  */
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe que representa um CD de músicas.

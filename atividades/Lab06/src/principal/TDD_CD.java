@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Classe de Testes do objeto CD.
+ * Classe de testes do objeto CD.
  */
 public class TDD_CD {
 
