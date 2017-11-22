@@ -68,15 +68,15 @@ public class MinhaCDteca {
 	}
 	
 	/**
-	 * Tenta remover uma quantidade N de CD's da coleção de CD's a partir de um array de títulos de tamanho N.
-	 * @param titulos Os títulos dos álbuns que deseja-se excluir.
+	 * Tenta remover uma quantidade N de CD's da coleção de CD's a partir de uma List<CD>.
+	 * @param titulos Uma List<CD> com os CD's que se deseja remover.
 	 * @return true se pelo menos um CD for removido, false se não remover nenhum CD da coleção.
 	 */
-	public boolean removeCDs(String[] titulos) {
+	public boolean removeCDs(List<CD> listaCDs) {
 		int cont = 0;
-		for(int i = 0; i < titulos.length; i++) {
+		for(int i = 0; i < listaCDs.size(); i++) {
 			try {
-				removeCD(titulos[i]);
+				removeCD(listaCDs.get(i).getTitulo());
 				cont++;
 			}catch(Exception e) {
 			}

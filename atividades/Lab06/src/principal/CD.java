@@ -19,7 +19,7 @@ public class CD {
 	private String artista;
 	private String titulo;
 	private String faixaPrincipal;
-	private int numeroMusicas;
+	private int quantMusicas;
 	private List<String> musicas;
 	private final int TAM_PADRAO = 10;
 	
@@ -31,21 +31,21 @@ public class CD {
 	 */
 	public CD(String titulo, String artista) throws Exception {
 		validaInfos(titulo, artista);
-		numeroMusicas = TAM_PADRAO;
-		musicas = new ArrayList<>(numeroMusicas);
+		quantMusicas = TAM_PADRAO;
+		musicas = new ArrayList<>(quantMusicas);
 	}
 	
 	/**
 	 * Construtor que recebe o título, o artista o número de músicas do CD.
 	 * @param titulo Título do álbum do artista.
 	 * @param artista Artista compositor do CD.
-	 * @param numeroMusicas Número de músicas que compõem o CD.
+	 * @param quantMusicas Número de músicas que compõem o CD.
 	 * @throws Exception Será lançada um Exception caso algum argumento passado seja inválido.
 	 */
-	public CD(String titulo, String artista, int numeroMusicas) throws Exception{
+	public CD(String titulo, String artista, int quantMusicas) throws Exception{
 		validaInfos(titulo, artista);
-		validaNumFaixas(numeroMusicas);
-		musicas = new ArrayList<>(this.numeroMusicas);
+		validaNumFaixas(quantMusicas);
+		musicas = new ArrayList<>(this.quantMusicas);
 	}
 	
 	/**
@@ -71,9 +71,9 @@ public class CD {
 	 * @param numeroMusicas Número de músicas do CD passado para verificação.
 	 * @throws Exception Será lançada uma exception caso o argumento passado seja inválido.
 	 */
-	private void validaNumFaixas(int numeroMusicas) throws Exception{
-		if(numeroMusicas > 0) {
-			this.numeroMusicas = numeroMusicas;
+	private void validaNumFaixas(int quantMusicas) throws Exception{
+		if(quantMusicas > 0) {
+			this.quantMusicas = quantMusicas;
 		}else {
 			throw new Exception("O álbum deve conter pelo menos 1 música.");
 		}
@@ -108,7 +108,7 @@ public class CD {
 	 * @return O número de músicas do CD.
 	 */
 	public int getNumeroMusicas() {
-		return numeroMusicas;
+		return quantMusicas;
 	}
 	
 	/**
@@ -153,7 +153,7 @@ public class CD {
 	 * @return true se a música for adicionada, false caso não seja possível adicioná-la a lista de músicas.
 	 */
 	public boolean cadastrarMusica(String musica) {
-		if(musica != null && !musica.trim().isEmpty() && musicas.size() < numeroMusicas) {
+		if(musica != null && !musica.trim().isEmpty() && musicas.size() < quantMusicas) {
 			return musicas.add(musica);
 		}
 		return false;
