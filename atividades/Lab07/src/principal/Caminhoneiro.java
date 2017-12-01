@@ -60,10 +60,13 @@ public class Caminhoneiro extends Rodoviario{
 			return TAXA_FIXA;
 		}else {
 			double toneladasExtras = toneladasTransportadas - 10;
-			return TAXA_FIXA + (toneladasExtras * 10);
+			return TAXA_FIXA + (toneladasExtras * 100);
 		}
 	}
 	
+	/**
+	 * Representação em String dos dados do caminhoneiro.
+	 */
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();

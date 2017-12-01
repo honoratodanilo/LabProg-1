@@ -59,6 +59,9 @@ public class Taxista extends Rodoviario{
 		return (numeroDePassageiros * 0.5);
 	}
 	
+	/**
+	 * Representação em String dos dados do taxista.
+	 */
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();

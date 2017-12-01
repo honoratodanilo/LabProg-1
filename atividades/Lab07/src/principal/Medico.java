@@ -81,6 +81,9 @@ public class Medico extends Contribuinte{
 		return this.gastosEmCongressos;
 	}
 	
+	/**
+	 * Representação em String dos dados do médico.
+	 */
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();

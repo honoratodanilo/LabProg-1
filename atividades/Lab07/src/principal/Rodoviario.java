@@ -57,6 +57,9 @@ public abstract class Rodoviario extends Contribuinte{
 		return (quilometragemPercorrida * 0.01);
 	}
 	
+	/**
+	 * Representação em String dos dados do rodoviário.
+	 */
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();

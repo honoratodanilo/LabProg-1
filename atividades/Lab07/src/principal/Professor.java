@@ -90,6 +90,9 @@ public class Professor extends Contribuinte {
 		return (gastosComMateriais * 0.5);
 	}
 	
+	/**
+	 * Representação em String dos dados do professor.
+	 */
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();

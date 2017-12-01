@@ -72,6 +72,7 @@ public class TDD_Contribuinte {
 		assertEquals(12345, c.getNumeroDoContribuinte());
 		assertEquals(true, c.temCasaPropria());
 		assertEquals(true, c.temCarro());
+		assertEquals(0, 150000, c.getValorDosBens());
 	}
 	
 	@Test
@@ -83,13 +84,13 @@ public class TDD_Contribuinte {
 		lista.add(new Professor("Josefa", 004, true, true, 7000, 2100, 260));
 		lista.add(new Professor("Sebastião", 005, false, true, 25000, 1550, 145));
 		
-		double mediaDosBens = Contribuinte.calculaMediaDosBensDeContribuintes(lista);
+		double mediaDosBens = Contribuinte.calculaMediaDosBensDeContribuintes(lista); //calcula média dos bens dos contribuintes de uma categoria + 50% desse valor
 		
-		assertTrue(lista.get(0).sinaisExterioresDeRiquezaExcessivos(mediaDosBens));
-		assertFalse(lista.get(1).sinaisExterioresDeRiquezaExcessivos(mediaDosBens));
-		assertFalse(lista.get(2).sinaisExterioresDeRiquezaExcessivos(mediaDosBens));
-		assertFalse(lista.get(3).sinaisExterioresDeRiquezaExcessivos(mediaDosBens));
-		assertFalse(lista.get(4).sinaisExterioresDeRiquezaExcessivos(mediaDosBens));
+		assertTrue(lista.get(0).sinaisExterioresDeRiquezaExcessivos(mediaDosBens)); //possui sinais exteriores de riqueza
+		assertFalse(lista.get(1).sinaisExterioresDeRiquezaExcessivos(mediaDosBens));//não possui sinais exteriores de riqueza
+		assertFalse(lista.get(2).sinaisExterioresDeRiquezaExcessivos(mediaDosBens));//não possui sinais exteriores de riqueza
+		assertFalse(lista.get(3).sinaisExterioresDeRiquezaExcessivos(mediaDosBens));//não possui sinais exteriores de riqueza
+		assertFalse(lista.get(4).sinaisExterioresDeRiquezaExcessivos(mediaDosBens));//não possui sinais exteriores de riqueza
 		
 		assertEquals(lista.size()+1, Contribuinte.numeroContribuintesCadastrados());
 		//verifica a quantidade de Contribuintes instânciados (5 desse método + 1 do método anterior)

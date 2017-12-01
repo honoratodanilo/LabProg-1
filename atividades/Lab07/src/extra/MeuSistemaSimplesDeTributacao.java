@@ -1,13 +1,13 @@
 package extra;
 
-import java.util.*;
-import principal.*;
-
 /*
  * Aluno 01: <Ivanildo Simplício da Silva Filho>
  * Aluno 02: <Fernanda Eduarda de Medeiros Silva>
  * Aluno 03: <Evelin Florenço da Silva>
  */
+
+import java.util.*;
+import principal.*;
 
 /**
  * Sistema simples de cadastros de contribuintes e verificação dos seus tributos e descontos.
@@ -15,14 +15,29 @@ import principal.*;
 public class MeuSistemaSimplesDeTributacao {
 
 	List<Contribuinte> listaDeContribuintes = null;
+	List<Professor> listaProfessores = null;
+	List<Medico> listaMedicos = null;
+	List<Caminhoneiro> listaCaminhoneiros = null;
+	List<Taxista> listaTaxitas = null;
 	Scanner sc = null;
 	
+	/**
+	 * Método principal que inicia a aplicação.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		new MeuSistemaSimplesDeTributacao().menuPrincipal();
 	}
 	
-	public void menuPrincipal() {
-		listaDeContribuintes = new ArrayList<Contribuinte>();
+	/**
+	 * Método que chama o menu principal do sistema.
+	 */
+	private void menuPrincipal() {
+		listaDeContribuintes = new ArrayList<>();
+		listaProfessores = new ArrayList<>();
+		listaMedicos = new ArrayList<>();
+		listaCaminhoneiros = new ArrayList<>();
+		listaTaxitas = new ArrayList<>();
 		sc = new Scanner(System.in);
 		int opcao=-1;
 		do {
@@ -50,7 +65,7 @@ public class MeuSistemaSimplesDeTributacao {
 				listarTodosContribuintes();
 				break;
 			case 4:
-				System.out.println("Opção em construção...");
+				sinaisExterioresDeRiqueza();
 				break;
 			case 0:
 				imprimeLinha();
@@ -67,6 +82,9 @@ public class MeuSistemaSimplesDeTributacao {
 		}while(opcao != 0);
 	}
 
+	/**
+	 * Método responsável por fazer coletar todos dados (de um contribuinte selecionável) e cadastrá-lo.
+	 */
 	private void cadastrarContribuinte() {
 		imprimeLinha();
 		int opcao = 0;
@@ -126,7 +144,9 @@ public class MeuSistemaSimplesDeTributacao {
 			else
 				sc.nextLine();
 			try {
-				listaDeContribuintes.add(new Professor(nome, numeroDoContribuinte, opCasa == 1, opCarro == 1, valorDosBens, salario, gastosComMateriais));
+				Professor prof = new Professor(nome, numeroDoContribuinte, opCasa == 1, opCarro == 1, valorDosBens, salario, gastosComMateriais);
+				listaDeContribuintes.add(prof);
+				listaProfessores.add(prof);
 				System.out.println("\nContribuinte cadastrado com sucesso!");
 			}catch (Exception e) {
 				System.out.println(e.getMessage());
@@ -146,7 +166,9 @@ public class MeuSistemaSimplesDeTributacao {
 			else
 				sc.nextLine();
 			try {
-				listaDeContribuintes.add(new Medico(nome, numeroDoContribuinte, opCasa == 1, opCarro == 1, valorDosBens, numeroDePacientes, gastosEmCongressos));
+				Medico med = new Medico(nome, numeroDoContribuinte, opCasa == 1, opCarro == 1, valorDosBens, numeroDePacientes, gastosEmCongressos);
+				listaDeContribuintes.add(med);
+				listaMedicos.add(med);
 				System.out.println("\nContribuinte cadastrado com sucesso!");
 			}catch (Exception e) {
 				System.out.println(e.getMessage());
@@ -166,7 +188,9 @@ public class MeuSistemaSimplesDeTributacao {
 			else
 				sc.nextLine();
 			try {
-				listaDeContribuintes.add(new Caminhoneiro(nome, numeroDoContribuinte, opCasa == 1, opCarro == 1, valorDosBens, KMpercorridos, toneladasTransportadas));
+				Caminhoneiro cam = new Caminhoneiro(nome, numeroDoContribuinte, opCasa == 1, opCarro == 1, valorDosBens, KMpercorridos, toneladasTransportadas);
+				listaDeContribuintes.add(cam);
+				listaCaminhoneiros.add(cam);
 				System.out.println("\nContribuinte cadastrado com sucesso!");
 			}catch (Exception e) {
 				System.out.println(e.getMessage());
@@ -186,25 +210,50 @@ public class MeuSistemaSimplesDeTributacao {
 			else
 				sc.nextLine();
 			try {
-				listaDeContribuintes.add(new Taxista(nome, numeroDoContribuinte, opCasa == 1, opCarro == 1, valorDosBens, quilometrosPercorridos, passageirosTransportados));
+				Taxista taxi = new Taxista(nome, numeroDoContribuinte, opCasa == 1, opCarro == 1, valorDosBens, quilometrosPercorridos, passageirosTransportados);
+				listaDeContribuintes.add(taxi);
+				listaTaxitas.add(taxi);
 				System.out.println("\nContribuinte cadastrado com sucesso!");
 			}catch (Exception e) {
-				System.out.println(e.getMessage());
+				System.out.println("\n"+e.getMessage());
 			}
 			break;
 		}
 		imprimeLinha();
 	}
 	
+	/**
+	 * Calcula os impostos e descontos de um contribuinte especificado.
+	 */
 	private void calcularImpostosEDescontos() {
 		imprimeLinha();
-		System.out.println("Lista de todos os contribuintes:");
+		sc.nextLine();
+		System.out.println("LISTA DE TODOS OS CONTRIBUINTES\n");
 		for(int i = 0; i < listaDeContribuintes.size(); i++) {
 			System.out.printf("%02d - %s\n", i+1, listaDeContribuintes.get(i).getNome());
 		}
+		System.out.print("\nNome do contribuinte ser verificado: ");
+		String nome = sc.nextLine();
+		boolean status = true;
+		for(int i = 0; i < listaDeContribuintes.size(); i++) {
+			if(listaDeContribuintes.get(i).getNome().equals(nome)) {
+				imprimeLinha();
+				System.out.printf("Nome do contribuinte: %s\n", nome);
+				System.out.printf("Total de tributos calculados: R$ %,.2f\n", listaDeContribuintes.get(i).calculaTributos());
+				System.out.printf("Descontos totais: R$ %,.2f\n", listaDeContribuintes.get(i).calculaDesconto());
+				System.out.printf("Valor final a ser pago: R$ %,.2f\n", listaDeContribuintes.get(i).calculaImpostoASerPago());
+				status = false;
+				break;
+			}
+		}
+		if(status)
+			System.out.println("\nO usuário procurado não está cadastrado no sistema.");
 		imprimeLinha();
 	}
 	
+	/**
+	 * Lista todos os contribuintes cadastrados no sistema.
+	 */
 	private void listarTodosContribuintes() {
 		imprimeLinha();
 		System.out.println("LISTA DE TODOS OS CONTRIBUINTES\n");
@@ -214,7 +263,75 @@ public class MeuSistemaSimplesDeTributacao {
 		imprimeLinha();
 	}
 	
-	public static void imprimeLinha() {
+	/**
+	 * Verifica os usuários que possuem ou não sinais exteriores de riqueza levando em conta sua categoria.
+	 */
+	private void sinaisExterioresDeRiqueza() {
+		imprimeLinha();
+		int opcao = 0;
+		System.out.println("Selecione a categoria que deseja verificar:");
+		System.out.println("[1] Professor - [2] Médico - [3] Caminhoneiro - [4] Taxista");
+		do {
+			System.out.print("Opção: ");
+			if(sc.hasNextInt())
+				opcao = sc.nextInt();
+			else
+				sc.nextLine();
+		}while(opcao < 1 || opcao > 4);
+		imprimeLinha();
+		switch (opcao) {
+		case 1:
+			if(!listaProfessores.isEmpty()) {
+				double mediaProfessores = Contribuinte.calculaMediaDosBensDeContribuintes(listaProfessores);
+				System.out.println("LISTA DE PROFESSORES\n");
+				for(int i = 0; i < listaProfessores.size(); i++) {
+					System.out.printf("Nome: %-25s Bens: R$ %-15s Externa riqueza: %s\n", listaProfessores.get(i).getNome(), String.format("%,.2f", listaProfessores.get(i).getValorDosBens()), listaProfessores.get(i).sinaisExterioresDeRiquezaExcessivos(mediaProfessores) ? "Sim" : "Não");
+				}
+			}else {
+				System.out.println("Nenhum professor cadastrado.");
+			}
+			break;
+		case 2:
+			if(!listaMedicos.isEmpty()) {
+				double mediaMedicos = Contribuinte.calculaMediaDosBensDeContribuintes(listaMedicos);
+				System.out.println("LISTA DE MÉDICOS\n");
+				for(int i = 0; i < listaMedicos.size(); i++) {
+					System.out.printf("Nome: %-25s Bens: R$ %-15s Externa riqueza: %s\n", listaMedicos.get(i).getNome(), String.format("%,.2f", listaMedicos.get(i).getValorDosBens()), listaMedicos.get(i).sinaisExterioresDeRiquezaExcessivos(mediaMedicos) ? "Sim" : "Não");
+				}
+			}else {
+				System.out.println("Nenhum médico cadastrado.");
+			}
+			break;
+		case 3:
+			if(!listaCaminhoneiros.isEmpty()) {
+				double mediaCaminhoneiros = Contribuinte.calculaMediaDosBensDeContribuintes(listaCaminhoneiros);
+				System.out.println("LISTA DE CAMINHONEIROS\n");
+				for(int i = 0; i < listaCaminhoneiros.size(); i++) {
+					System.out.printf("Nome: %-25s Bens: R$ %-15s Externa riqueza: %s\n", listaCaminhoneiros.get(i).getNome(), String.format("%,.2f", listaCaminhoneiros.get(i).getValorDosBens()), listaCaminhoneiros.get(i).sinaisExterioresDeRiquezaExcessivos(mediaCaminhoneiros) ? "Sim" : "Não");
+				}
+			}else {
+				System.out.println("Nenhum caminhoneiro cadastrado.");
+			}	
+			break;
+		case 4:
+			if(!listaTaxitas.isEmpty()) {
+				double mediaTaxistas = Contribuinte.calculaMediaDosBensDeContribuintes(listaTaxitas);
+				System.out.println("LISTA DE TAXISTAS\n");
+				for(int i = 0; i < listaTaxitas.size(); i++) {
+					System.out.printf("Nome: %-25s Bens: R$ %-15s Externa riqueza: %s\n", listaTaxitas.get(i).getNome(), String.format("%,.2f", listaTaxitas.get(i).getValorDosBens()), listaTaxitas.get(i).sinaisExterioresDeRiquezaExcessivos(mediaTaxistas) ? "Sim" : "Não");
+				}
+			}else {
+				System.out.println("Nenhum taxista cadastrado.");
+			}			
+			break;
+		}
+		imprimeLinha();
+	}
+
+	/**
+	 * Imprime linha para dividir os menus.
+	 */
+	private static void imprimeLinha() {
 		for(int i = 0; i < 110; i++)
 			System.out.print("-");
 		System.out.println();
